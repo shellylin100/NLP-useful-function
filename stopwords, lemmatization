@@ -1,0 +1,19 @@
+# NLP useful function
+
+# function to remove stopwords #
+def remove_stopwords(texts):
+  return [[word for word in simple_preprocess(str(doc)) if word not in stop_words] for doc in texts] 
+ 
+ 
+# Define a function lemmatization #
+def lemmatization(texts, allowed_postags = ['NOUN', 'ADJ', 'VERB', 'ADV']):
+  # Empty list for results
+  texts_out = []
+  # do the lemmatization and select pos tags:
+  for sent in texts:
+    # first convert into a list and then apply nlp() function
+    doc = nlp(" ".join(sent))
+    texts_out.append([token.lemma_ for token in doc if token.pos_ in allowed_postags])
+  return texts_out
+ 
+ 
