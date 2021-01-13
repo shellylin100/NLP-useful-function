@@ -25,4 +25,23 @@ def spacy_tokenizer(sentence):
   # Removing stop words
   mytokens = [word for word in mytokens if word not in stop_words and word not in punctuation]
   # return preprocessed list of tokens
-  return mytokens 
+  return mytokens
+
+# Custom transformer using spaCy
+class predictors(TransformerMixin):
+  def transform(self, X, **transform_params):
+    # Cleaning Text
+    return[clean_text(text) for text in X]
+  
+  def fit(self, X, y = None, **fit_params):
+    return self
+  
+  def get_params(self, deep = True):
+    return {}
+
+# Basic function to clean the text
+def clean_text(text):
+  # Removing spaces and converting text into lowercase
+  return text.strip().lower()
+  
+  
